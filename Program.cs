@@ -8,7 +8,7 @@ namespace Bc.LocalServer
 {
     public class Program
     {
-        
+
         //服务对象
         public static MyHttpServer httpServer;
         //http服务路由
@@ -17,15 +17,12 @@ namespace Bc.LocalServer
         static void Main(string[] args)
         {
 
-            Console.Title = ("鼎腾本地服务器");
+            Console.Title = ("本地服务器");
             Console.ForegroundColor = ConsoleColor.DarkGreen;
-            ToolUtils.Print("-------------------------------------------------------------------------",0);
-            ToolUtils.Print("-----------------------------    DT科技-PDF批量生成器 -------------------", 0);
-            ToolUtils.Print("-----------------------------------让汽配采购更轻松----------------------", 0);
             ToolUtils.Print("-------------------------------------------------------------------------", 0);
+            ToolUtils.Print("-----------------------------    Hello World ----------------------------", 0);
             ToolUtils.Print("-------------------------------------------------------------------------", 0);
-            ToolUtils.Print("--------------------------------------------------------------------------", 0);
-            //启动http服务
+           //启动http服务
             httpServer = new MyHttpServer(routes);//初始化，传入路由
             httpServer.respNotice += dataHandle;//回调方法，接收到http请求时触发
             httpServer.Start(15080);//端口  
@@ -44,15 +41,24 @@ namespace Bc.LocalServer
             var ss = route.Split('/');
             string controller = ss[1].ToLower();
             if (ss.Length >= 3)
-                view = route.Split('/')[2]; 
+                view = route.Split('/')[2];
             //预定义返回的json数据
 
             //根据路由key的val匹配相应的算法,以下是自己的逻辑
             switch (controller)
             {
                 case "pdf":
-                   var resp_data = new PdfHelper().Do(data);  
-                    httpServer.responData(resp_data, resp);
+                    if (view == "index")
+                    {
+                        var resp_data = new PdfHelper().Do(data);
+                        httpServer.responData(resp_data, resp);
+                    }
+                    if (view == "operdir")
+                    {
+                        new PdfHelper().OpenFolder(data);
+                        httpServer.responData("", resp);
+                    }
+
                     break;
                 default:
                     httpServer.responData("404", resp);
