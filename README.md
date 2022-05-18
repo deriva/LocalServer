@@ -1,7 +1,7 @@
 # LocalServer
 ## 使用web链接打开本地应用 （含在线抓取网页生成pdf）
  
-
+[<a href="http://www.laddyq.com/tools/vn/pdf.html">官网地址</a>]
 
 c# html生成pdf,C#编写 HTML生成PDF的方式有几种
 这里介绍一种:C#使用wkhtmltopdf，把HTML生成PDF（包含分页）
