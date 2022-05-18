@@ -18,6 +18,7 @@ c# html生成pdf,C#编写 HTML生成PDF的方式有几种
 --------------------------------------------------------------------------------------------------------------------------
   本地搭建一个控制台应用程序过程:主要用到HttpListener 监听  核心代码如下
 //服务对象
+
 public static MyHttpServer httpServer;
 static void Main(string[] args)
  {
@@ -37,6 +38,7 @@ static void Main(string[] args)
 web页面调用本地服务方法其实很简单:
 检测web服务是否 开始:
  //检测本地服务是否开启
+ 
  $.ajax({
      url: 'http://127.0.0.1:15080/Pdf/index',
      type: 'get',
@@ -51,9 +53,11 @@ web页面调用本地服务方法其实很简单:
          layer.alert("本地服务未开启，请先开启再来导出");
      }
  });
+ 
  --------------------------------------------------------------------------------------------------------------------------
  接下来的我们可以在自己的页面调用本地服务了 ，可以通过传要抓取的页面http地址，和下载的pdf文件名 2个参数  
  html代码如下:
+ 
  <input type="button" class="layui-btn btnexport" value="本地导出" onclick="PP.ExportPdf(1)" />
 <script type="text/javascript">
     var PP = {
