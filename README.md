@@ -1,24 +1,20 @@
 # LocalServer
-使用web链接打开本地应用 
-内含html在线生成pdf功能
+## 使用web链接打开本地应用 
+ 内含html在线生成pdf功能
 
 
 c# html生成pdf,C#编写 HTML生成PDF的方式有几种
 这里介绍一种:C#使用wkhtmltopdf，把HTML生成PDF（包含分页）
 架构设计:
 
-本地搭建一个控制台应用程序（指定端口：15080）
-    |
-    |
-    |
-    |
-    |
+本地搭建一个控制台应用程序（指定端口：15080）--->
+   
   web系统 利用ajax访问本地程序：http://127.0.0.1:15080
   
---------------------------------------------------------------------------------------------------------------------------
+---
   本地搭建一个控制台应用程序过程:主要用到HttpListener 监听  核心代码如下
 //服务对象
-
+```
 public static MyHttpServer httpServer;
 static void Main(string[] args)
  {
@@ -34,12 +30,12 @@ static void Main(string[] args)
      httpServer.Start(15080);//端口  
      Console.ReadKey();
 }
-
+```
 web页面调用本地服务方法其实很简单:
 检测web服务是否 开始:
  //检测本地服务是否开启
- 
- $.ajax({
+ ```
+   $.ajax({
      url: 'http://127.0.0.1:15080/Pdf/index',
      type: 'get',
      complete: function (r) {
@@ -52,12 +48,12 @@ web页面调用本地服务方法其实很简单:
      error: function (XMLHttpRequest, textStatus, errorThrown) {
          layer.alert("本地服务未开启，请先开启再来导出");
      }
- });
- 
+   });
+ ```
  --------------------------------------------------------------------------------------------------------------------------
  接下来的我们可以在自己的页面调用本地服务了 ，可以通过传要抓取的页面http地址，和下载的pdf文件名 2个参数  
  html代码如下:
- 
+ ```
  <input type="button" class="layui-btn btnexport" value="本地导出" onclick="PP.ExportPdf(1)" />
 <script type="text/javascript">
     var PP = {
@@ -84,7 +80,7 @@ web页面调用本地服务方法其实很简单:
 </script>
 
 
- 
+ ```
  
 
   
